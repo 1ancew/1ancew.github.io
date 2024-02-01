@@ -1,0 +1,301 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>内网渗透|信息收集 | 1ance's blog</title><meta name="keywords" content="内网,信息收集"><meta name="author" content="1ance"><meta name="copyright" content="1ance"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="简介 渗透测试本质就是信息收集，信息收集的深度和广度直接关系到内网渗透测试的成败。所以把信息收集工作做好是渗透的第一步。  0x01本机信息收集 本机信息包括操作系统、权限、内网IP地址段、杀毒软件、端口、服务、补丁更新频率、网络连接、共享、会话等。如果是域内主机，操作系统、应用软件、补丁、服务、杀毒软件一般都是批量安装的。  手动收集信息 查询网络配置信息。  1ipconfig &#x2F;all">
+<meta property="og:type" content="article">
+<meta property="og:title" content="内网渗透|信息收集">
+<meta property="og:url" content="https://blog.1ance.xyz/2021/11/24/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F-%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/index.html">
+<meta property="og:site_name" content="1ance&#39;s blog">
+<meta property="og:description" content="简介 渗透测试本质就是信息收集，信息收集的深度和广度直接关系到内网渗透测试的成败。所以把信息收集工作做好是渗透的第一步。  0x01本机信息收集 本机信息包括操作系统、权限、内网IP地址段、杀毒软件、端口、服务、补丁更新频率、网络连接、共享、会话等。如果是域内主机，操作系统、应用软件、补丁、服务、杀毒软件一般都是批量安装的。  手动收集信息 查询网络配置信息。  1ipconfig &#x2F;all">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://blog.1ance.xyz/img/default.jpg">
+<meta property="article:published_time" content="2021-11-24T07:34:13.000Z">
+<meta property="article:modified_time" content="2021-11-27T10:11:26.146Z">
+<meta property="article:author" content="1ance">
+<meta property="article:tag" content="内网">
+<meta property="article:tag" content="信息收集">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://blog.1ance.xyz/img/default.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://blog.1ance.xyz/2021/11/24/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F-%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '内网渗透|信息收集',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2021-11-27 18:11:26'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const fontSizeVal = saveToLocal.get('global-font-size')
+    if (fontSizeVal !== undefined) {
+      document.documentElement.style.setProperty('--global-font-size', fontSizeVal + 'px')
+    }
+    
+    const detectApple = () => {
+      if (GLOBAL_CONFIG_SITE.isHome && /iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 5.4.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/header.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data is-center"><div class="data-item"><a href="/archives/"><div class="headline">文章</div><div class="length-num">21</div></a></div><div class="data-item"><a href="/tags/"><div class="headline">标签</div><div class="length-num">24</div></a></div><div class="data-item"><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 列表</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">1ance's blog</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 列表</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">内网渗透|信息收集</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-11-24T07:34:13.000Z" title="发表于 2021-11-24 15:34:13">2021-11-24</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2021-11-27T10:11:26.146Z" title="更新于 2021-11-27 18:11:26">2021-11-27</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/">内网渗透</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">1.1k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>4分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="内网渗透|信息收集"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div><article class="post-content" id="article-container"><h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><blockquote>
+<p>渗透测试本质就是信息收集，信息收集的深度和广度直接关系到内网渗透测试的成败。所以把信息收集工作做好是渗透的第一步。</p>
+</blockquote>
+<h1 id="0x01本机信息收集"><a href="#0x01本机信息收集" class="headerlink" title="0x01本机信息收集"></a>0x01本机信息收集</h1><blockquote>
+<p>本机信息包括操作系统、权限、内网IP地址段、杀毒软件、端口、服务、补丁更新频率、网络连接、共享、会话等。如果是域内主机，操作系统、应用软件、补丁、服务、杀毒软件一般都是批量安装的。</p>
+</blockquote>
+<h2 id="手动收集信息"><a href="#手动收集信息" class="headerlink" title="手动收集信息"></a>手动收集信息</h2><ol>
+<li>查询网络配置信息。</li>
+</ol>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">ipconfig</span> /all</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li><p>查询操作系统及软件信息。</p>
+<ul>
+<li><p>查询操作系统和版本信息。</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">systeminfo | <span class="built_in">findstr</span> /B /C:&quot;OS Name&quot; /C:&quot;OS Version&quot; //英文</span><br><span class="line">systeminfo | <span class="built_in">findstr</span> /B /C:&quot;OS 名称&quot; /C:&quot;OS 版本&quot;    //中文</span><br></pre></td></tr></table></figure></li>
+<li><p>查询系统体系结构。</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="variable">%PROCESSOR_ARCHITECTURE%</span></span><br></pre></td></tr></table></figure></li>
+<li><p>利用wmic查看安转的软件及版本、路径等。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wmic product get name,version</span><br></pre></td></tr></table></figure></li>
+<li><p>利用 PowerShell 命令收集软件版本的信息。</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">powershell <span class="string">&quot;Get-WmiObject -class Win32_Product |Select-Object -Property name,version&quot;</span></span><br></pre></td></tr></table></figure></li>
+<li><p>查询本机环境变量设置。</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">set</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>查询本机服务信息。</p>
+<ul>
+<li><p>利用wmic查询本机服务信息。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wmic service list brief/full</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>查询进程列表。</p>
+<ul>
+<li><p>查看当前进程列表和进程用户，分析软件、邮件客户端、杀软等。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tasklist</span><br><span class="line">wmic process list brief</span><br></pre></td></tr></table></figure>
+
+<p>常见杀软的进程：</p>
+<table>
+<thead>
+<tr>
+<th>进 程</th>
+<th>软件名称</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>360sd.exe</td>
+<td>360杀毒</td>
+</tr>
+<tr>
+<td>360tray.exe</td>
+<td>360实时保护</td>
+</tr>
+<tr>
+<td>ZhuDongFangYu.exe</td>
+<td>360主动防御</td>
+</tr>
+<tr>
+<td>KSafeTray.exe</td>
+<td>金山卫士</td>
+</tr>
+<tr>
+<td>SafeDogUpdateCenter.exe</td>
+<td>服务器安全狗</td>
+</tr>
+<tr>
+<td>McAfee McShield.exe</td>
+<td>McAfee</td>
+</tr>
+<tr>
+<td>egui.exe</td>
+<td>NOD32</td>
+</tr>
+<tr>
+<td>AVP.EXE</td>
+<td>卡巴斯基</td>
+</tr>
+<tr>
+<td>avguard.exe</td>
+<td>小红伞</td>
+</tr>
+<tr>
+<td>bdagent.exe</td>
+<td>BitDefender</td>
+</tr>
+</tbody></table>
+</li>
+</ul>
+</li>
+<li><p>查看启动程序信息。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wmic startup get command,caption </span><br></pre></td></tr></table></figure></li>
+<li><p>查看计划任务。</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">schtasks /query /fo LIST /v</span><br></pre></td></tr></table></figure></li>
+<li><p>查看主机开机时间。</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">net</span> statistics workstation</span><br></pre></td></tr></table></figure></li>
+<li><p>查看用户相关信息。</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">net</span> user //当前本机用户列表</span><br><span class="line"><span class="built_in">net</span> localgroup administrators //查看本地管理员组的成员</span><br><span class="line">query user || qwinsta //查看当前在线用户</span><br><span class="line"><span class="built_in">net</span> user <span class="number">123</span> <span class="number">123</span>.com /add //添加用户名为<span class="number">123</span>且密码为<span class="number">123</span>.com的用户</span><br><span class="line"><span class="built_in">net</span> localgroup administrators <span class="number">123</span> /add //将用户<span class="number">123</span>加入管理员组</span><br><span class="line"><span class="built_in">net</span> localgroup administrators <span class="number">123</span> /delete ///将用户<span class="number">123</span>移出管理员组</span><br></pre></td></tr></table></figure></li>
+<li><p>列出或断开本地计算机和连接的客户端的会话。</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">net</span> session</span><br></pre></td></tr></table></figure></li>
+<li><p>查看端口列表.</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netstat -ano</span><br></pre></td></tr></table></figure></li>
+<li><p>查看补丁列表。</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">systeminfo</span><br><span class="line">wmic qfe get Caption,Description,HotFixID,InstalledOn</span><br></pre></td></tr></table></figure></li>
+<li><p>查询本机共享列表。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">net share</span><br><span class="line">wmic share get name,path,status</span><br></pre></td></tr></table></figure></li>
+<li><p>查询路由表及所有可用接口的ARP缓存表。</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">route <span class="built_in">print</span></span><br><span class="line">arp -a</span><br></pre></td></tr></table></figure></li>
+<li><p>查询防火墙相关配置。</p>
+<ul>
+<li><p>关闭防火墙</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">netsh firewall <span class="built_in">set</span> opmode disable (Windows Server <span class="number">2003</span> 系统及之前版本) </span><br><span class="line">netsh advfirewall <span class="built_in">set</span> allprofiles state off (Windows Server <span class="number">2003</span> 系统及之后版本)</span><br></pre></td></tr></table></figure></li>
+<li><p>查看防火墙配置。</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netstat firewall show config</span><br></pre></td></tr></table></figure></li>
+<li><p>修改防火墙配置。</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">(Windows Server <span class="number">2003</span> 系统及之前版本) 允许指定程序全部连接 </span><br><span class="line">netsh firewall add allowedprogram c:\nc.exe &quot;allow nc&quot; enable </span><br><span class="line"></span><br><span class="line">(Windows Server <span class="number">2003</span> 之后系统版本) </span><br><span class="line">允许指定程序连入 </span><br><span class="line">netsh advfirewall firewall add rule name=&quot;pass nc&quot; <span class="built_in">dir</span>=<span class="keyword">in</span> action=allow program=&quot;C: \nc.exe&quot; </span><br><span class="line">允许指定程序连出 </span><br><span class="line">netsh advfirewall firewall add rule name=&quot;Allow nc&quot; <span class="built_in">dir</span>=out action=allow program=&quot;C: \nc.exe&quot; </span><br><span class="line">允许 <span class="number">3389</span> 端口放行 </span><br><span class="line">netsh advfirewall firewall add rule name=&quot;Remote Desktop&quot; protocol=TCP <span class="built_in">dir</span>=<span class="keyword">in</span> localport=<span class="number">3389</span> action=allow</span><br></pre></td></tr></table></figure></li>
+<li><p>自定义防火墙日志的储存位置。</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netsh advfirewall <span class="built_in">set</span> currentprofile logging filename &quot;C:\windows\temp\fw.log&quot;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>查看代理配置情况。</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">reg query &quot;HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Internet Settings&quot;</span><br></pre></td></tr></table></figure></li>
+<li><p>查询并开启远程连接服务。</p>
+<ul>
+<li><p>查看远程连接端口（0xd3d换成10进制即3389）</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">REG QUERY &quot;HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp&quot; /V PortNumber</span><br></pre></td></tr></table></figure></li>
+<li><p>在Windows Server 2003 中开启3389 端口。</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wmic <span class="built_in">path</span> win32_terminalservicesetting where (__CLASS !=&quot;&quot;) <span class="keyword">call</span> setallowtsconnections <span class="number">1</span></span><br></pre></td></tr></table></figure></li>
+<li><p>在Windows Server 2008 和Windows Server 2012 中开启3389 端口。</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">wmic /namespace:\\root\cimv2\terminalservices <span class="built_in">path</span> win32_terminalservicesetting where (__CLASS !=&quot;&quot;) <span class="keyword">call</span> setallowtsconnections <span class="number">1</span> wmic /namespace:\\root\cimv2\terminalservices <span class="built_in">path</span> </span><br><span class="line"></span><br><span class="line">win32_tsgeneralsetting where (TerminalName=&#x27;RDP-Tcp&#x27;) <span class="keyword">call</span> setuserauthenticationrequired <span class="number">1</span> </span><br><span class="line"></span><br><span class="line">reg add &quot;HKLM\SYSTEM\CURRENT\CONTROLSET\CONTROL\TERMINAL SERVER&quot; /v fSingleSessionPerUser /t REG_DWORD /d <span class="number">0</span> /f</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ol>
+<h2 id="自动收集信息"><a href="#自动收集信息" class="headerlink" title="自动收集信息"></a>自动收集信息</h2><ol>
+<li>wmic脚本：<a target="_blank" rel="noopener" href="https://www.fuzzysecurity.com/scripts/files/wmic_info.rar">https://www.fuzzysecurity.com/scripts/files/wmic_info.rar</a></li>
+</ol>
+<p>下载后直接运行脚本：</p>
+<p><code>wmic_info.bat</code></p>
+<p><img src="/2021/11/24/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F-%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/image-20211127174647668.png" alt="image-20211127174647668"></p>
+<p>会在当前目录下生成out.html文件，打开即可。</p>
+<p><img src="/2021/11/24/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F-%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/image-20211127174927920.png" alt="image-20211127174927920"></p>
+<ol start="2">
+<li><p>Empire下主机信息收集。</p>
+<p>当使用 Empire 使主机上线后，可调用<code>powershell/situational_awareness/host/winenum</code>模块查看本机用户、域组成员、密码设置时间、系统基本信息、网络配置信息、共享信息、剪贴板等等。（运行这个模块需要管理员权限）</p>
+</li>
+</ol>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">1ance</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://blog.1ance.xyz/2021/11/24/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F-%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/">https://blog.1ance.xyz/2021/11/24/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F-%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://blog.1ance.xyz" target="_blank">1ance's blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E5%86%85%E7%BD%91/">内网</a><a class="post-meta__tags" href="/tags/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/">信息收集</a></div><div class="post_share"><div class="social-share" data-image="/img/default.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button button--animated"><i class="fas fa-qrcode"></i> 打赏</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/wechat.jpg" target="_blank"><img class="post-qr-code-img" src="/img/wechat.jpg" alt="wechat"/></a><div class="post-qr-code-desc">wechat</div></li><li class="reward-item"><a href="/img/alipay.jpg" target="_blank"><img class="post-qr-code-img" src="/img/alipay.jpg" alt="alipay"/></a><div class="post-qr-code-desc">alipay</div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2021/11/24/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F-%E5%9F%9F%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/"><img class="prev-cover" src="/2021/11/24/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F-%E5%9F%9F%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/bg.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">内网渗透|域环境搭建</div></div></a></div><div class="next-post pull-right"><a href="/2021/11/21/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F-powershell-wmic%E8%AF%A6%E8%A7%A3/"><img class="next-cover" src="/2021/11/21/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F-powershell-wmic%E8%AF%A6%E8%A7%A3/bg.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">内网渗透|powershell&amp;wmic详解</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2021/11/24/内网渗透-域环境搭建/" title="内网渗透|域环境搭建"><img class="cover" src="/2021/11/24/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F-%E5%9F%9F%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/bg.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-11-24</div><div class="title">内网渗透|域环境搭建</div></div></a></div><div><a href="/2021/11/16/内网渗透-基础篇常用名词解释/" title="内网渗透|基础篇常用名词解释"><img class="cover" src="/img/default.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-11-16</div><div class="title">内网渗透|基础篇常用名词解释</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/header.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">1ance</div><div class="author-info__description">Come and study with me!</div></div><div class="card-info-data is-center"><div class="card-info-data-item"><a href="/archives/"><div class="headline">文章</div><div class="length-num">21</div></a></div><div class="card-info-data-item"><a href="/tags/"><div class="headline">标签</div><div class="length-num">24</div></a></div><div class="card-info-data-item"><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div></div><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/bug20" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:w1ance@qq.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="/img/wechat.png" target="_blank" title="微信"><i class="fab fa-weixin"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">欢迎光顾我的博客！https://blog.csdn.net/weixin_44033675</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AE%80%E4%BB%8B"><span class="toc-number">1.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#0x01%E6%9C%AC%E6%9C%BA%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86"><span class="toc-number">2.</span> <span class="toc-text">0x01本机信息收集</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%89%8B%E5%8A%A8%E6%94%B6%E9%9B%86%E4%BF%A1%E6%81%AF"><span class="toc-number">2.1.</span> <span class="toc-text">手动收集信息</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%87%AA%E5%8A%A8%E6%94%B6%E9%9B%86%E4%BF%A1%E6%81%AF"><span class="toc-number">2.2.</span> <span class="toc-text">自动收集信息</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2021/11/24/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F-%E5%9F%9F%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/" title="内网渗透|域环境搭建"><img src="/2021/11/24/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F-%E5%9F%9F%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/bg.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="内网渗透|域环境搭建"/></a><div class="content"><a class="title" href="/2021/11/24/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F-%E5%9F%9F%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/" title="内网渗透|域环境搭建">内网渗透|域环境搭建</a><time datetime="2021-11-24T08:03:53.000Z" title="发表于 2021-11-24 16:03:53">2021-11-24</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/11/24/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F-%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/" title="内网渗透|信息收集"><img src="/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="内网渗透|信息收集"/></a><div class="content"><a class="title" href="/2021/11/24/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F-%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/" title="内网渗透|信息收集">内网渗透|信息收集</a><time datetime="2021-11-24T07:34:13.000Z" title="发表于 2021-11-24 15:34:13">2021-11-24</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/11/21/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F-powershell-wmic%E8%AF%A6%E8%A7%A3/" title="内网渗透|powershell&amp;wmic详解"><img src="/2021/11/21/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F-powershell-wmic%E8%AF%A6%E8%A7%A3/bg.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="内网渗透|powershell&amp;wmic详解"/></a><div class="content"><a class="title" href="/2021/11/21/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F-powershell-wmic%E8%AF%A6%E8%A7%A3/" title="内网渗透|powershell&amp;wmic详解">内网渗透|powershell&amp;wmic详解</a><time datetime="2021-11-21T09:03:32.000Z" title="发表于 2021-11-21 17:03:32">2021-11-21</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/11/16/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F-%E5%9F%BA%E7%A1%80%E7%AF%87%E5%B8%B8%E7%94%A8%E5%90%8D%E8%AF%8D%E8%A7%A3%E9%87%8A/" title="内网渗透|基础篇常用名词解释"><img src="/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="内网渗透|基础篇常用名词解释"/></a><div class="content"><a class="title" href="/2021/11/16/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F-%E5%9F%BA%E7%A1%80%E7%AF%87%E5%B8%B8%E7%94%A8%E5%90%8D%E8%AF%8D%E8%A7%A3%E9%87%8A/" title="内网渗透|基础篇常用名词解释">内网渗透|基础篇常用名词解释</a><time datetime="2021-11-16T05:36:00.000Z" title="发表于 2021-11-16 13:36:00">2021-11-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/11/07/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F-%E5%B7%A5%E5%85%B7%E7%AF%87%E4%B9%8Bmimikatz/" title="内网渗透|工具篇之mimikatz"><img src="/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="内网渗透|工具篇之mimikatz"/></a><div class="content"><a class="title" href="/2021/11/07/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F-%E5%B7%A5%E5%85%B7%E7%AF%87%E4%B9%8Bmimikatz/" title="内网渗透|工具篇之mimikatz">内网渗透|工具篇之mimikatz</a><time datetime="2021-11-07T13:47:54.000Z" title="发表于 2021-11-07 21:47:54">2021-11-07</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2021 By 1ance</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">Hi, welcome to my <a href="https://blog.1ance.xyz">blog</a>!</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="font-plus" type="button" title="放大字体"><i class="fas fa-plus"></i></button><button id="font-minus" type="button" title="缩小字体"><i class="fas fa-minus"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"></div><script defer="defer" id="fluttering_ribbon" mobile="true" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-fluttering-ribbon.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

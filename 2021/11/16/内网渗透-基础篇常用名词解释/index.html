@@ -1,0 +1,188 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>内网渗透|基础篇常用名词解释 | 1ance's blog</title><meta name="keywords" content="内网,学习笔记"><meta name="author" content="1ance"><meta name="copyright" content="1ance"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="0x01什么是内网？内网指局域网(Local Area Network,LAN)，指在某一区域内由多台计算机互连而成的计算机组，组网范围通常在数千米以内。在局域网内可以实现文件管理、应用软件共享、打印机共享等。内网是封闭的，可以由办公室内的两台计算机组成，也可以是由一个公司内的大量计算机组成。 0x02工作组工作组（work group）是指将局域网内的计算机按照不同的功能化分到不同的组中；用以方">
+<meta property="og:type" content="article">
+<meta property="og:title" content="内网渗透|基础篇常用名词解释">
+<meta property="og:url" content="https://blog.1ance.xyz/2021/11/16/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F-%E5%9F%BA%E7%A1%80%E7%AF%87%E5%B8%B8%E7%94%A8%E5%90%8D%E8%AF%8D%E8%A7%A3%E9%87%8A/index.html">
+<meta property="og:site_name" content="1ance&#39;s blog">
+<meta property="og:description" content="0x01什么是内网？内网指局域网(Local Area Network,LAN)，指在某一区域内由多台计算机互连而成的计算机组，组网范围通常在数千米以内。在局域网内可以实现文件管理、应用软件共享、打印机共享等。内网是封闭的，可以由办公室内的两台计算机组成，也可以是由一个公司内的大量计算机组成。 0x02工作组工作组（work group）是指将局域网内的计算机按照不同的功能化分到不同的组中；用以方">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://blog.1ance.xyz/img/default.jpg">
+<meta property="article:published_time" content="2021-11-16T05:36:00.000Z">
+<meta property="article:modified_time" content="2021-11-16T07:32:14.038Z">
+<meta property="article:author" content="1ance">
+<meta property="article:tag" content="内网">
+<meta property="article:tag" content="学习笔记">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://blog.1ance.xyz/img/default.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://blog.1ance.xyz/2021/11/16/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F-%E5%9F%BA%E7%A1%80%E7%AF%87%E5%B8%B8%E7%94%A8%E5%90%8D%E8%AF%8D%E8%A7%A3%E9%87%8A/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '内网渗透|基础篇常用名词解释',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2021-11-16 15:32:14'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const fontSizeVal = saveToLocal.get('global-font-size')
+    if (fontSizeVal !== undefined) {
+      document.documentElement.style.setProperty('--global-font-size', fontSizeVal + 'px')
+    }
+    
+    const detectApple = () => {
+      if (GLOBAL_CONFIG_SITE.isHome && /iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 5.4.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/header.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data is-center"><div class="data-item"><a href="/archives/"><div class="headline">文章</div><div class="length-num">21</div></a></div><div class="data-item"><a href="/tags/"><div class="headline">标签</div><div class="length-num">24</div></a></div><div class="data-item"><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 列表</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">1ance's blog</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 列表</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">内网渗透|基础篇常用名词解释</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-11-16T05:36:00.000Z" title="发表于 2021-11-16 13:36:00">2021-11-16</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2021-11-16T07:32:14.038Z" title="更新于 2021-11-16 15:32:14">2021-11-16</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/">内网渗透</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">2.2k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>6分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="内网渗透|基础篇常用名词解释"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div><article class="post-content" id="article-container"><h1 id="0x01什么是内网？"><a href="#0x01什么是内网？" class="headerlink" title="0x01什么是内网？"></a>0x01什么是内网？</h1><p>内网指局域网(Local Area Network,LAN)，指在某一区域内由多台计算机互连而成的计算机组，组网范围通常在数千米以内。在局域网内可以实现文件管理、应用软件共享、打印机共享等。内网是封闭的，可以由办公室内的两台计算机组成，也可以是由一个公司内的大量计算机组成。</p>
+<h1 id="0x02工作组"><a href="#0x02工作组" class="headerlink" title="0x02工作组"></a>0x02工作组</h1><p><strong>工作组（work group）</strong>是指将局域网内的计算机按照不同的功能化分到不同的组中；用以方便管理和查找。<br>比如学校的网络是一个大的局域网，可以将教务处的计算机划分到教务处组中，将财务部的计算机划分到财务处组中，各个学院的计算机划分到各自学院的组中，方便管理和查找计算机资源。如果你要访问某个系别的资源，就在“网上邻居”里找到那个系的工作组名，双击就可以看到那个系别的电脑了。<br><strong>工作组没有集中管理的作用，工作组里的所有计算机都是对等的。</strong></p>
+<h1 id="0x03域"><a href="#0x03域" class="headerlink" title="0x03域"></a>0x03域</h1><p><strong>域（Domain）</strong>是一个有安全边界的计算机集合（安全边界即一个域中的用户无法访问里一个域中的资源）。可以简单理解成是工作组的升级版，只是域的安全管理控制机制更加严格。</p>
+<h1 id="0x04域控制器"><a href="#0x04域控制器" class="headerlink" title="0x04域控制器"></a>0x04域控制器</h1><p><strong>域控制器（Domain Control，DC）</strong>是域中的一台类似管理服务器的计算机，我们可以形象地将它理解成一个单位的门禁，即域环境中的门禁。域控制器负责所有连入的计算机和用户的验证工作。<br><strong>域控制器中存在由这个域的账户、密码、属于这个域的计算机等信息构成的数据库。</strong><br>当计算机连接到域时，域控制器首先要鉴别这台电脑是否是属于这个域的，用户使用的登录账号是否存在、密码是否正确。如果以上信息有一样不正确的，那么域控制器就会拒绝这个用户通过这台计算机登录，如果用户不能登录，就不能访问服务器中的资源。<br>域控制器是整个域的通信枢纽，所有的权限身份验证都在域控制器上进行，域内所有用来验证身份的账号和密码散列值都保存在域控制器中。（内网渗透拿下域控就拿到了所有域内的账号和密码）</p>
+<h1 id="0x05域环境分类"><a href="#0x05域环境分类" class="headerlink" title="0x05域环境分类"></a>0x05域环境分类</h1><h2 id="单域"><a href="#单域" class="headerlink" title="单域"></a>单域</h2><p>即只有一个域，一个域内一般要有至少两台域服务器，一台作为DC，另一台作为备份DC。活动目录的数据库（AD）是存储在DC中的。适用于地理位置固定规模较小的公司。</p>
+<h2 id="父域子域"><a href="#父域子域" class="headerlink" title="父域子域"></a>父域子域</h2><p>子域是相对父域来说的，每个域中都有独立的安全策略。举例说明：公司总部为父域(zb.com)，各地的分公司为子域(sub.zb.com)，父域的域控称之为主域控，子域的域控称之为子域控，在建立子域控时默认和父域建立了信任关系，所以父域子域间可以互相访问。</p>
+<h2 id="域树"><a href="#域树" class="headerlink" title="域树"></a>域树</h2><p>域树（Tree）是多个域通过建立信任关系组成的集合。父域子域组成的域就是一个域树。一个域管理员只能管理本域，不能访问或者管理其他域，如果需要互相访问，则需要建立信任关系（True Relation）。在域树中，域的名字是连续的。<br><img src="/2021/11/16/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F-%E5%9F%BA%E7%A1%80%E7%AF%87%E5%B8%B8%E7%94%A8%E5%90%8D%E8%AF%8D%E8%A7%A3%E9%87%8A/image-20211116143829464.png" alt="image-20211116143829464"></p>
+<h2 id="域森林"><a href="#域森林" class="headerlink" title="域森林"></a>域森林</h2><p>域森林（Forest）是指多个域树通过建立信任关系组成的集合。由一个或多个没有形成连续名字空间的域树组成。<br><img src="/2021/11/16/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F-%E5%9F%BA%E7%A1%80%E7%AF%87%E5%B8%B8%E7%94%A8%E5%90%8D%E8%AF%8D%E8%A7%A3%E9%87%8A/image-20211116143852953.png" alt="image-20211116143852953"></p>
+<h1 id="0x06域名服务器"><a href="#0x06域名服务器" class="headerlink" title="0x06域名服务器"></a>0x06域名服务器</h1><p>域名服务器（Domain Name Server，DNS）是指用于实现域名（Domain Name）和与之相对应的IP地址转换的服务器。DNS服务器和域控制器通常配置在同一台机器上。</p>
+<h1 id="0x07活动目录"><a href="#0x07活动目录" class="headerlink" title="0x07活动目录"></a>0x07活动目录</h1><p>活动目录（Active Directory，AD）是指域环境中提供目录服务的组件。<br>目录包含了有关各种对象，例如用户、用户组、计算机、域、组织单位（OU）以及安全策略的信息。目录存储在域控上，并且可以被网络应用程序或者服务所访问。<br>活动目录是域内各种资源的一个目录，通过目录检索可以方便的查找、管理和使用这些对象资源。这个拥有层次结构的数据库，就是活动目录数据库，简称AD库。<br>要实现域环境，其实就是要安装AD，安装在那台计算机上，该计算机就成为了DC。</p>
+<h1 id="0x08DMZ区"><a href="#0x08DMZ区" class="headerlink" title="0x08DMZ区"></a>0x08DMZ区</h1><p>DMZ（Demilitarized zone） ，中文名为“隔离区”，或称“非军事化区”。它是为了解决安装防火墙后外部网络的访问用户不能访问内部网络服务器的问题，从而设立的一个非安全系统与安全系统之间的缓冲区。<br>DMZ 区可以理解为一个不同于外网或内网的特殊网络区域，DMZ 内通常放置一些不含机密信息的公用服务器，比如 WEB 服务器、E-Mail 服务器、FTP 服务器等。这样来自外网的访问者只可以访问 DMZ 中的服务，但不可能接触到存放在内网中的信息等，即使 DMZ 中服务器受到破坏，也不会对内网中的信息造成影响。<br><img src="/2021/11/16/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F-%E5%9F%BA%E7%A1%80%E7%AF%87%E5%B8%B8%E7%94%A8%E5%90%8D%E8%AF%8D%E8%A7%A3%E9%87%8A/image-20211116150050881.png" alt="image-20211116150050881"></p>
+<h1 id="0x09域中计算机分类"><a href="#0x09域中计算机分类" class="headerlink" title="0x09域中计算机分类"></a>0x09域中计算机分类</h1><p>域结构中的网络中，计算机的身份是不平等的，有域控制器、成员服务器、客户机、独立服务器四种类型。</p>
+<ul>
+<li>域控制器<br>用于管理所有的网络访问，包括登录服务器、访问共享目录和资源。域控制器中存储了域内所有的账户和策略信息，包括安全策略、用户身份验证信息和账户信息。域中必须存在。</li>
+<li>成员服务器<br>是指安装了服务器操作系统并加入了域，但没有安装活动目录的计算机，主要是提供网络资源。资源的提供者。</li>
+<li>客户机<br>域中的计算机可以是安装了其他操作系统的计算机，用户利用这些计算机和域中的账号就可以登录域。资源的使用者。</li>
+<li>独立服务器<br>独立服务器和域没有关系。<h1 id="0x10域内权限"><a href="#0x10域内权限" class="headerlink" title="0x10域内权限"></a>0x10域内权限</h1></li>
+</ul>
+<ol>
+<li>域本地组<br>域本地组成员来自林中任何域中的用户账户、全局组和通用组以及本域中的域本地组，在本域范围内可用，只能在其所在域内指派权限。域本地组不能嵌套在其他组中。域本地组主要用于授予本域内的资源。简单来说就是多域用户访问单域资源，域林中的用户访问同一个域内的资源。</li>
+<li>全局组<br>全局组成员来自于同一域的用户账户和全局组，在林范围内可用。可以在域林的任何域内指派权限。<br>也就是说能够添加到全局组的成员是本域的成员或者全局组（这样就构成了组的嵌套）。如果在上海的域中创建了全局组A，那么能添加到A中的人只能是上海域中的对象或者是其他可信任域，如北京或大连的全局组。简单来说就是单域用户访问多域资源。</li>
+<li>通用组<br>通用组成员来自林中任何域中的用户账户、全局组和其他的通用组，在全林范围内可用。但是注意通用组的成员不是保存在各自的域控制器上，而是保存在全局编录中，当发生变化时能够全林复制。 </li>
+</ol>
+<p>归纳：域本地组-来自全林用于本域；全局组-来自本域用于全林；通用组-来自全林用于全林。</p>
+<h1 id="0x11-A-G-DL-P策略"><a href="#0x11-A-G-DL-P策略" class="headerlink" title="0x11 A-G-DL-P策略"></a>0x11 A-G-DL-P策略</h1><p>A-G-DL-P 策略是将用户账号添加到全局组中，将全局组添加到域本地组中，然后为域本地组分配资源权限。</p>
+<ul>
+<li>A 表示用户账号</li>
+<li>G 表示全局组</li>
+<li>U 表示通用组</li>
+<li>DL 表示域本地组</li>
+<li>P 表示资源权限</li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">1ance</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://blog.1ance.xyz/2021/11/16/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F-%E5%9F%BA%E7%A1%80%E7%AF%87%E5%B8%B8%E7%94%A8%E5%90%8D%E8%AF%8D%E8%A7%A3%E9%87%8A/">https://blog.1ance.xyz/2021/11/16/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F-%E5%9F%BA%E7%A1%80%E7%AF%87%E5%B8%B8%E7%94%A8%E5%90%8D%E8%AF%8D%E8%A7%A3%E9%87%8A/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://blog.1ance.xyz" target="_blank">1ance's blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E5%86%85%E7%BD%91/">内网</a><a class="post-meta__tags" href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a></div><div class="post_share"><div class="social-share" data-image="/img/default.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button button--animated"><i class="fas fa-qrcode"></i> 打赏</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/wechat.jpg" target="_blank"><img class="post-qr-code-img" src="/img/wechat.jpg" alt="wechat"/></a><div class="post-qr-code-desc">wechat</div></li><li class="reward-item"><a href="/img/alipay.jpg" target="_blank"><img class="post-qr-code-img" src="/img/alipay.jpg" alt="alipay"/></a><div class="post-qr-code-desc">alipay</div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2021/11/21/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F-powershell-wmic%E8%AF%A6%E8%A7%A3/"><img class="prev-cover" src="/2021/11/21/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F-powershell-wmic%E8%AF%A6%E8%A7%A3/bg.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">内网渗透|powershell&amp;wmic详解</div></div></a></div><div class="next-post pull-right"><a href="/2021/11/07/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F-%E5%B7%A5%E5%85%B7%E7%AF%87%E4%B9%8Bmimikatz/"><img class="next-cover" src="/img/default.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">内网渗透|工具篇之mimikatz</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2021/11/24/内网渗透-信息收集/" title="内网渗透|信息收集"><img class="cover" src="/img/default.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-11-24</div><div class="title">内网渗透|信息收集</div></div></a></div><div><a href="/2021/11/24/内网渗透-域环境搭建/" title="内网渗透|域环境搭建"><img class="cover" src="/2021/11/24/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F-%E5%9F%9F%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/bg.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-11-24</div><div class="title">内网渗透|域环境搭建</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/header.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">1ance</div><div class="author-info__description">Come and study with me!</div></div><div class="card-info-data is-center"><div class="card-info-data-item"><a href="/archives/"><div class="headline">文章</div><div class="length-num">21</div></a></div><div class="card-info-data-item"><a href="/tags/"><div class="headline">标签</div><div class="length-num">24</div></a></div><div class="card-info-data-item"><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div></div><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/bug20" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:w1ance@qq.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="/img/wechat.png" target="_blank" title="微信"><i class="fab fa-weixin"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">欢迎光顾我的博客！https://blog.csdn.net/weixin_44033675</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#0x01%E4%BB%80%E4%B9%88%E6%98%AF%E5%86%85%E7%BD%91%EF%BC%9F"><span class="toc-number">1.</span> <span class="toc-text">0x01什么是内网？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#0x02%E5%B7%A5%E4%BD%9C%E7%BB%84"><span class="toc-number">2.</span> <span class="toc-text">0x02工作组</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#0x03%E5%9F%9F"><span class="toc-number">3.</span> <span class="toc-text">0x03域</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#0x04%E5%9F%9F%E6%8E%A7%E5%88%B6%E5%99%A8"><span class="toc-number">4.</span> <span class="toc-text">0x04域控制器</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#0x05%E5%9F%9F%E7%8E%AF%E5%A2%83%E5%88%86%E7%B1%BB"><span class="toc-number">5.</span> <span class="toc-text">0x05域环境分类</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%95%E5%9F%9F"><span class="toc-number">5.1.</span> <span class="toc-text">单域</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%88%B6%E5%9F%9F%E5%AD%90%E5%9F%9F"><span class="toc-number">5.2.</span> <span class="toc-text">父域子域</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%9F%E6%A0%91"><span class="toc-number">5.3.</span> <span class="toc-text">域树</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%9F%E6%A3%AE%E6%9E%97"><span class="toc-number">5.4.</span> <span class="toc-text">域森林</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#0x06%E5%9F%9F%E5%90%8D%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="toc-number">6.</span> <span class="toc-text">0x06域名服务器</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#0x07%E6%B4%BB%E5%8A%A8%E7%9B%AE%E5%BD%95"><span class="toc-number">7.</span> <span class="toc-text">0x07活动目录</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#0x08DMZ%E5%8C%BA"><span class="toc-number">8.</span> <span class="toc-text">0x08DMZ区</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#0x09%E5%9F%9F%E4%B8%AD%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%88%86%E7%B1%BB"><span class="toc-number">9.</span> <span class="toc-text">0x09域中计算机分类</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#0x10%E5%9F%9F%E5%86%85%E6%9D%83%E9%99%90"><span class="toc-number">10.</span> <span class="toc-text">0x10域内权限</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#0x11-A-G-DL-P%E7%AD%96%E7%95%A5"><span class="toc-number">11.</span> <span class="toc-text">0x11 A-G-DL-P策略</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2021/11/24/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F-%E5%9F%9F%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/" title="内网渗透|域环境搭建"><img src="/2021/11/24/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F-%E5%9F%9F%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/bg.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="内网渗透|域环境搭建"/></a><div class="content"><a class="title" href="/2021/11/24/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F-%E5%9F%9F%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/" title="内网渗透|域环境搭建">内网渗透|域环境搭建</a><time datetime="2021-11-24T08:03:53.000Z" title="发表于 2021-11-24 16:03:53">2021-11-24</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/11/24/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F-%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/" title="内网渗透|信息收集"><img src="/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="内网渗透|信息收集"/></a><div class="content"><a class="title" href="/2021/11/24/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F-%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/" title="内网渗透|信息收集">内网渗透|信息收集</a><time datetime="2021-11-24T07:34:13.000Z" title="发表于 2021-11-24 15:34:13">2021-11-24</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/11/21/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F-powershell-wmic%E8%AF%A6%E8%A7%A3/" title="内网渗透|powershell&amp;wmic详解"><img src="/2021/11/21/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F-powershell-wmic%E8%AF%A6%E8%A7%A3/bg.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="内网渗透|powershell&amp;wmic详解"/></a><div class="content"><a class="title" href="/2021/11/21/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F-powershell-wmic%E8%AF%A6%E8%A7%A3/" title="内网渗透|powershell&amp;wmic详解">内网渗透|powershell&amp;wmic详解</a><time datetime="2021-11-21T09:03:32.000Z" title="发表于 2021-11-21 17:03:32">2021-11-21</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/11/16/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F-%E5%9F%BA%E7%A1%80%E7%AF%87%E5%B8%B8%E7%94%A8%E5%90%8D%E8%AF%8D%E8%A7%A3%E9%87%8A/" title="内网渗透|基础篇常用名词解释"><img src="/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="内网渗透|基础篇常用名词解释"/></a><div class="content"><a class="title" href="/2021/11/16/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F-%E5%9F%BA%E7%A1%80%E7%AF%87%E5%B8%B8%E7%94%A8%E5%90%8D%E8%AF%8D%E8%A7%A3%E9%87%8A/" title="内网渗透|基础篇常用名词解释">内网渗透|基础篇常用名词解释</a><time datetime="2021-11-16T05:36:00.000Z" title="发表于 2021-11-16 13:36:00">2021-11-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/11/07/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F-%E5%B7%A5%E5%85%B7%E7%AF%87%E4%B9%8Bmimikatz/" title="内网渗透|工具篇之mimikatz"><img src="/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="内网渗透|工具篇之mimikatz"/></a><div class="content"><a class="title" href="/2021/11/07/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F-%E5%B7%A5%E5%85%B7%E7%AF%87%E4%B9%8Bmimikatz/" title="内网渗透|工具篇之mimikatz">内网渗透|工具篇之mimikatz</a><time datetime="2021-11-07T13:47:54.000Z" title="发表于 2021-11-07 21:47:54">2021-11-07</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2021 By 1ance</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">Hi, welcome to my <a href="https://blog.1ance.xyz">blog</a>!</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="font-plus" type="button" title="放大字体"><i class="fas fa-plus"></i></button><button id="font-minus" type="button" title="缩小字体"><i class="fas fa-minus"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"></div><script defer="defer" id="fluttering_ribbon" mobile="true" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-fluttering-ribbon.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
